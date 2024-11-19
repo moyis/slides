@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Slides</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reset.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/blood.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/base16/material-darker.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1 class="r-fit-text">Power of Testing</h1>
+          <h4 class="r-fit-text">
+            Eleva la Calidad de tu Código con Tests que Adaptan, Previenen y
+            Documentan
+          </h4>
+        </section>
+        <section
+          data-background-image="/utrecht.webp"
+          data-background-opacity="0.2"
+        >
+          <h2>Fausto Moya</h2>
+          <ul>
+            <li>Mar del Plata 🇦🇷 🛫 Utrecht 🇳🇱</li>
+            <li>Técnico Superior en Programación 👨‍💻</li>
+            <li>Technical Lead @ Albert Heijn Tech 🛒</li>
+            <li>+8 años Java ☕️ +6 años Kotlin 🚀</li>
+            <li>moyis.dev 🌐</li>
+          </ul>
+        </section>
+      <section>
+        <h1 class="r-fit-text">Disclaimer</h1>
+      </section>
+        <section>
+          <h3>¿Por qué escribimos tests?</h3>
+          <ul>
+            <li class="fragment">Asegurarnos que el código funciona ✅</li>
+            <li class="fragment">Refactorizar nuestro código sin miedo 🔒</li>
+            <li class="fragment">
+              Documentación que evoluciona con el código 📜
+            </li>
+            <li class="fragment">Obtener feedback rápidamente 🔁</li>
+            <li class="fragment">Aclarar los requerimientos 🔍</li>
+            <li class="fragment">Para recibir feedback sobre el diseño 📐</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Código con el que vamos a trabajar</h2>
+          <img src="/repo-qr.webp" height="300px" />
+        </section>
+
+        <section
+          data-background-image="/donny-dont.gif"
+          data-background-size="80%"
+        ></section>
+        <section
+          data-background-image="/donny-dont.gif"
+          data-background-size="80%"
+          data-background-opacity="0.5"
+          data-transition="fade"
+        >
+          <h1>Buenas practicas para el testing</h1>
+        </section>
+        <section
+          data-background-image="/donny-dont.gif"
+          data-background-size="80%"
+          data-background-opacity="0.5"
+          data-transition="fade"
+        >
+          <section data-markdown>
+            <textarea data-template>
+					```java [1-9|7-8]
+					@Test
+					void happyPath() {
+					  Employee employee = aValidEmployee();
+					  
+					  employeeService.createEmployee(employee);
+					  
+					  verify(emailService).sendConfirmationEmail(employee);
+					  verify(employeeRepository).save(employee);
+					}
+					```
+					</textarea
+            >
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+					```java [1-17|1-8|10-17]
+					@Test
+					void sendsConfirmationEmail() {
+					  Employee employee = aValidEmployee();
+				  
+					  employeeService.createEmployee(employee);
+				  
+					  verify(emailService).sendConfirmationEmail(employee);
+					}
+				  
+					@Test
+					void savesEmployeeInDatabase() {
+					  var employee = aValidEmployee();
+				  
+					  employeeService.createEmployee(employee);
+				  
+					  verify(employeeRepository).save(employee);
+					}
+					```
+					</textarea
+            >
+          </section>
+        </section>
+        <section
+          data-background-image="/donny-dont.gif"
+          data-background-size="80%"
+          data-background-opacity="0.5"
+          data-transition="fade"
+        >
+          <section data-markdown>
+            <textarea data-template>
+				  ```java [1-13|3-8]
+				  @Test
+				  void doesNotThrowExceptionForValidEmployee() {
+					Employee employee = new Employee();
+					employee.setName("John Doe");
+					employee.setAge(25);
+					Address address = new Address();
+					address.setCity("New York");
+					employee.setAddress(address);
+				
+					EmployeeValidator employeeValidator = new EmployeeValidator();
+				
+					assertThatCode(() -> employeeValidator.validate(employee)).doesNotThrowAnyException();
+				  }
+				  ```
+				  </textarea
+            >
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+				  ```java [1-8|3]
+				  @Test
+				  void doesNotThrowExceptionForValidEmployee() {
+					Employee employee = aValidEmployee();
+
+					EmployeeValidator employeeValidator = new EmployeeValidator();
+				
+					assertThatCode(() -> employeeValidator.validate(employee)).doesNotThrowAnyException();
+				  }
+				  ```
+				  </textarea
+            >
+          </section>
+        </section>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/notes/notes.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/markdown/markdown.min.js"
+    ></script>
+    <script
+      type="module"
+      src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"
+    ></script>
+    <script type="module">
+      Reveal.initialize({
+        hash: true,
+        progress: false,
+        autoanimate: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
