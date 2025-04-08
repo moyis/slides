@@ -19,158 +19,116 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/blood.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/dracula.min.css"
     />
     <link
       rel="stylesheet"
       href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/base16/material-darker.min.css"
     />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .fragment.blur {
+        filter: none;
+      }
+      .fragment.blur.visible {
+        filter: blur(5px);
+      }
+    </style>
   </head>
 
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>
+        <section data-auto-animate>
           <h1 class="r-fit-text">Power of Testing</h1>
-          <h4 class="r-fit-text">
-            Eleva la Calidad de tu Código con Tests que Adaptan, Previenen y
-            Documentan
-          </h4>
         </section>
-        <section
-          data-background-image="/utrecht.webp"
-          data-background-opacity="0.2"
-        >
-          <h2>Fausto Moya</h2>
-          <ul>
-            <li>Mar del Plata 🇦🇷 🛫 Utrecht 🇳🇱</li>
-            <li>Técnico Superior en Programación 👨‍💻</li>
-            <li>Technical Lead @ Albert Heijn Tech 🛒</li>
-            <li>+8 años Java ☕️ +6 años Kotlin 🚀</li>
-            <li>moyis.dev 🌐</li>
+        <section data-auto-animate hidden>
+          <h2>¿Quien soy?</h2>
+          <ul style="list-style-type: none">
+            <li>🇦🇷 Fausto Moya</li>
+            <li class="fragment">🇳🇱 Utrecht, Países Bajos</li>
+            <li class="fragment">☕️ +8 años Java</li>
+            <li class="fragment">🧀 Technical Lead @ Albert Heijn Tech</li>
+            <li class="fragment">👨‍💻 Técnico Superior en Programación</li>
+            <li class="fragment">🌐 moyis.dev</li>
           </ul>
         </section>
-      <section>
-        <h1 class="r-fit-text">Disclaimer</h1>
-      </section>
-        <section>
-          <h3>¿Por qué escribimos tests?</h3>
-          <ul>
-            <li class="fragment">Asegurarnos que el código funciona ✅</li>
-            <li class="fragment">Refactorizar nuestro código sin miedo 🔒</li>
-            <li class="fragment">
-              Documentación que evoluciona con el código 📜
-            </li>
-            <li class="fragment">Obtener feedback rápidamente 🔁</li>
-            <li class="fragment">Aclarar los requerimientos 🔍</li>
-            <li class="fragment">Para recibir feedback sobre el diseño 📐</li>
-          </ul>
+        <section data-auto-animate>
+          <h1 class="r-fit-text">Disclaimer</h1>
+          <p class="fragment">Verifiquen todo por su cuenta. El testing es muy subjetivo</p>
         </section>
         <section>
-          <h2>Código con el que vamos a trabajar</h2>
-          <img src="/repo-qr.webp" height="300px" />
-        </section>
-
-        <section
-          data-background-image="/donny-dont.gif"
-          data-background-size="80%"
-        ></section>
-        <section
-          data-background-image="/donny-dont.gif"
-          data-background-size="80%"
-          data-background-opacity="0.5"
-          data-transition="fade"
-        >
-          <h1>Buenas practicas para el testing</h1>
-        </section>
-        <section
-          data-background-image="/donny-dont.gif"
-          data-background-size="80%"
-          data-background-opacity="0.5"
-          data-transition="fade"
-        >
-          <section data-markdown>
-            <textarea data-template>
-					```java [1-9|7-8]
-					@Test
-					void happyPath() {
-					  Employee employee = aValidEmployee();
-					  
-					  employeeService.createEmployee(employee);
-					  
-					  verify(emailService).sendConfirmationEmail(employee);
-					  verify(employeeRepository).save(employee);
-					}
-					```
-					</textarea
-            >
+          <section data-auto-animate>
+            <h3>¿Qué es un test?</h3>
+            <p class="fragment">Verificación para saber que el código hace lo que queremos que haga</p>
           </section>
-          <section data-markdown>
-            <textarea data-template>
-					```java [1-17|1-8|10-17]
-					@Test
-					void sendsConfirmationEmail() {
-					  Employee employee = aValidEmployee();
-				  
-					  employeeService.createEmployee(employee);
-				  
-					  verify(emailService).sendConfirmationEmail(employee);
-					}
-				  
-					@Test
-					void savesEmployeeInDatabase() {
-					  var employee = aValidEmployee();
-				  
-					  employeeService.createEmployee(employee);
-				  
-					  verify(employeeRepository).save(employee);
-					}
-					```
-					</textarea
-            >
+          <section data-auto-animate>
+            <h3>¿Por qué escribimos tests?</h3>
+            <ul style="list-style-type: none">
+              <li class="fragment">✅ Asegurarnos que el código funciona</li>
+              <li class="fragment">🔒 Refactorizar nuestro código sin miedo</li>
+              <li class="fragment">📜 Documentación que evoluciona con el código</li>
+              <li class="fragment">🔁 Obtener feedback rápidamente</li>
+              <li class="fragment">🔍 Aclarar los requerimientos</li>
+              <li class="fragment">📐 Para recibir feedback sobre el diseño</li>
+            </ul>
+          </section>
+          <section data-auto-animate>
+            <h2>Herramientas</h2>
+            <ul style="list-style-type: none">
+              <li>☕️ Java 21</li>
+              <li>🛠 Gradle</li>
+              <li>🧪 JUnit 5</li>
+              <li>✅ AssertJ</li>
+              <li class="fragment custom blur">🎭 Mockito</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Repositorio</h2>
+            <img
+              src="repo-qr.svg"
+              alt="QR Code"
+              style="margin: auto; display: block"
+            />
           </section>
         </section>
-        <section
-          data-background-image="/donny-dont.gif"
-          data-background-size="80%"
-          data-background-opacity="0.5"
-          data-transition="fade"
-        >
-          <section data-markdown>
-            <textarea data-template>
-				  ```java [1-13|3-8]
-				  @Test
-				  void doesNotThrowExceptionForValidEmployee() {
-					Employee employee = new Employee();
-					employee.setName("John Doe");
-					employee.setAge(25);
-					Address address = new Address();
-					address.setCity("New York");
-					employee.setAddress(address);
-				
-					EmployeeValidator employeeValidator = new EmployeeValidator();
-				
-					assertThatCode(() -> employeeValidator.validate(employee)).doesNotThrowAnyException();
-				  }
-				  ```
-				  </textarea
-            >
+        <section>
+          <section>
+            <h2>Buenos Tests</h2>
+            <p>
+              ¿Cual es la forma mas sencilla de probar que una parte de nuestro
+              código no esta testeada?
+            </p>
           </section>
-          <section data-markdown>
-            <textarea data-template>
-				  ```java [1-8|3]
-				  @Test
-				  void doesNotThrowExceptionForValidEmployee() {
-					Employee employee = aValidEmployee();
-
-					EmployeeValidator employeeValidator = new EmployeeValidator();
-				
-					assertThatCode(() -> employeeValidator.validate(employee)).doesNotThrowAnyException();
-				  }
-				  ```
-				  </textarea
-            >
+          <section data-auto-animate>
+            <h2>Code Coverage</h2>
+            <p>Line</p>
+            <p>Branch</p>
+          </section>
+          <section data-auto-animate>
+            <h2>Code Coverage</h2>
+            <blockquote>
+              El code-coverage no es un trofeo para celebrar lo testeado, es un
+              mapa para encontrar el código que falta por testear.
+            </blockquote>
+          </section>
+          <section data-auto-animate>
+            <h2>Code Coverage</h2>
+            <p>100% Coverage != 0% Bugs</p>
+          </section>
+          <section data-auto-animate>
+            <h2>Un buen test</h2>
+            <ul style="list-style-type: none">
+              <li class="fragment">🤖 Es automatizado</li>
+              <li class="fragment">🌱 Es mínimo</li>
+              <li class="fragment">🌡️ Es sensible</li>
+              <li class="fragment">🏝️ Esta aislado</li>
+              <li class="fragment">🎯 Es especifico</li>
+              <li class="fragment">🗣️ Es expresivo</li>
+              <li class="fragment">🛠️ Es funcional</li>
+              <li class="fragment">⚡ Es rápido</li>
+              <li class="fragment">🔁 Es repetible</li>
+            </ul>
           </section>
         </section>
       </div>
@@ -194,7 +152,7 @@
     <script type="module">
       Reveal.initialize({
         hash: true,
-        progress: false,
+        progress: true,
         autoanimate: true,
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
